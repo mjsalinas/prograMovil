@@ -65,7 +65,7 @@ export default function RegistrationScreen() {
             {errores.nombre && <Text style={styles.error}>{errores.nombre}</Text>}
 
             <Text style={styles.label}>
-                Apellido:
+                Apellido:  
             </Text>
             <TextInput
                 style={styles.input}

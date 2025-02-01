@@ -1,74 +1,50 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Text, View, Button } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { useEffect, useState } from 'react';
 
 export default function HomeScreen() {
+  const [logueado, setLogueado] = useState(false);
+  const [contador, setContador] = useState(0);
+  const [usuario, setUsuario] = useState({nombre:'', edad:0})
+
+
+  useEffect(()=>{
+    if(logueado){
+      setTimeout(()=>{
+        setUsuario((prevUsuario)=>({...prevUsuario, edad: 25}));
+      },2000)
+    }
+  }, [logueado])
+
+  const incrementarContador = () => {
+    setContador(contador + 1);
+  }
+
+  const obtenerMensajeEdad = () => {
+    if (usuario.edad < 18) {
+      return "Eres menor de edad"
+    } else{
+      return "Eres mayor de edad"
+    }
+  }
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome Maria!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={{flex: 1, justifyContent:"center", alignItems:"center"}}>
+      {/* Uso de operador ternario para toma de decisiones  */}
+      {logueado ? <Text>Bienvenido</Text> : <Text>Inicia Sesion</Text>}
+
+      {/* actualizacion de estado utilizando operadores logicos y funcion del estado  */}
+      <Button title="Toggle" onPress={()=>{
+        setLogueado(!logueado);
+        incrementarContador();
+      }}/>
+      <Text>Cantidad de clicks: {contador} </Text>
+      <Text> {obtenerMensajeEdad()}</Text>
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
