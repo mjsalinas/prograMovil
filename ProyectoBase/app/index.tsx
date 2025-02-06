@@ -19,9 +19,7 @@ export default function Index() {
     }
 
     return (
-        <View style={styles.container}>
-            {user ? ( <HomeScreen user={user} onLogout={handleLogout} />) : (<LoginScreen onLogin={handleLogin}/>)}
-        </View>
+        <HomeScreen/>
     );
 }
 
