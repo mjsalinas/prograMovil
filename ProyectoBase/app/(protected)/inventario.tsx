@@ -1,14 +1,16 @@
+import { useRouter } from "expo-router"
 import { FlatList, TouchableOpacity, View, Text, StyleSheet } from "react-native"
 
 
 
 const inventario = [
-    { id: '1', nombre: 'Laptop', categoria: 'Electronicos', cantidad: 5 },
-    { id: '2', nombre: 'Teclado', categoria: 'Accesorios', cantidad: 10 },
+    { id: '1', nombre: 'Laptop', categoria: 'Electronicos', cantidad: 5},
+    { id: '2', nombre: 'Teclado', categoria: 'Accesorios', cantidad: 10},
     { id: '3', nombre: 'Escritorio', categoria: 'Muebles', cantidad: 15 },
 ]
 
 export default function InventarioScreen() {
+const router = useRouter();
 
     return (
         <View style={style.container}>
@@ -19,6 +21,7 @@ export default function InventarioScreen() {
                 renderItem={({ item }) => (
                     <TouchableOpacity
                     style={style.item}
+                    onPress={()=> router.push({pathname: `/articulo/${item.id}`, params:item})}
                     >
                         <Text style={style.text}>{item.nombre}</Text>
                         <Text style={style.text}>Categoria: {item.categoria}</Text>
