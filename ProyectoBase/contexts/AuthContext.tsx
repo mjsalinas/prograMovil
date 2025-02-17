@@ -1,7 +1,18 @@
 import { createContext, isValidElement, useContext, useState } from "react"
 
-type User = {email: string} | null;
+type User = {
+    email: string,
+    name: string,
+    location: string,
+    startedSince: string,
 
+} | null;
+const defaultUserProps = {
+    email: '',
+    name: 'Juan Perez2',
+    location: 'Honduras',
+    startedSince: '2010',
+}
 const AuthContext = createContext<{
     user: User,
     isAllowed: boolean;
@@ -11,21 +22,21 @@ const AuthContext = createContext<{
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
-    if (!context) throw new Error ("useAuth debe usarse dentro de AuthProvider");
+    if (!context) throw new Error("useAuth debe usarse dentro de AuthProvider");
     return context;
 }
 
-export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User>(null);
     const [isAllowed, setIsAllowed] = useState<boolean>(false);
 
-    const login =  (email: string) => {
+    const login = (email: string) => {
         const isValidEmail = email.endsWith('.edu');
 
-        if (isValidEmail){
-            setUser({email});
+        if (isValidEmail) {
+            setUser({...defaultUserProps ,email });
             setIsAllowed(true);
-        }else{
+        } else {
             setUser(null);
             setIsAllowed(false);
             alert("Solo correos .edu pueden ingresar")
@@ -38,9 +49,9 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     }
 
     return (
-        <AuthContext.Provider value={{user, isAllowed, login, logout}}>
+        <AuthContext.Provider value={{ user, isAllowed, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
-   
+
 }

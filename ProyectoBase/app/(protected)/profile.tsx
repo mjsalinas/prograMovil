@@ -35,7 +35,7 @@ export default function ProfileScreen() {
                     />
                     <Text style={styles.userName}>Juan Perez</Text>
                     <Text style={styles.userEmail}>juan.perez@example.edu</Text>
-                    <ProfileInfoCard user={'@juanperez'} location={'Ciudad de Mexico'} startedSince={'2022'} ></ProfileInfoCard>
+                    <ProfileInfoCard user={user?.name as string} location={user?.location as string} startedSince={user?.startedSince as string} ></ProfileInfoCard>
                     <View style={styles.buttonsContainer}>
                         <Animated.View style={[styles.animatedView, { transform: [{ scale: scale1 }] }]}>
                             <TouchableOpacity
