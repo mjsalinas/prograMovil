@@ -18,7 +18,7 @@ export default function ProfileScreen() {
             {user?.profilePic ? (
                 <Image source={{ uri: user.profilePic }} style={styles.profileImage} />
             ) : (
-                <Image source={require("@/assets/default-avatar.png")} style={styles.profileImage} />
+                <Image source={require("@/assets/images/profilepic.jpg")} style={styles.profileImage} />
             )}
 
             <Text style={styles.title}>Perfil de {nombre}</Text>
