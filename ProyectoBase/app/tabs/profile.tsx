@@ -1,6 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useFocusEffect } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { View, Text, TextInput, Image, StyleSheet } from "react-native";
 
 export default function ProfileScreen() {
@@ -15,8 +15,10 @@ export default function ProfileScreen() {
 
     return (
         <View style={styles.container}>
-            {user?.profilePic && (
+            {user?.profilePic ? (
                 <Image source={{ uri: user.profilePic }} style={styles.profileImage} />
+            ) : (
+                <Image source={require("@/assets/default-avatar.png")} style={styles.profileImage} />
             )}
 
             <Text style={styles.title}>Perfil de {nombre}</Text>
@@ -31,19 +33,18 @@ export default function ProfileScreen() {
     );
 }
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#f4f4f4",
+        backgroundColor: "#f5f5f5",
         padding: 20,
     },
     profileImage: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        width: 120,
+        height: 120,
+        borderRadius: 60,
         marginBottom: 20,
     },
     title: {
@@ -52,12 +53,13 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     input: {
-        width: "80%",
+        width: "100%",
         padding: 10,
         borderWidth: 1,
         borderColor: "#ccc",
-        borderRadius: 8,
+        borderRadius: 5,
         backgroundColor: "#fff",
     },
 });
+
 
