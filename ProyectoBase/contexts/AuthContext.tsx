@@ -1,9 +1,13 @@
-import { createContext, isValidElement, useContext, useState } from "react"
+import { createContext, useContext, useState } from "react";
 
-type User = {email: string} | null;
+type User = { 
+    email: string;
+    name: string;
+    profilePic: string;
+} | null;
 
 const AuthContext = createContext<{
-    user: User,
+    user: User;
     isAllowed: boolean;
     login: (email: string) => void;
     logout: () => void;
@@ -11,36 +15,39 @@ const AuthContext = createContext<{
 
 export const useAuth = () => {
     const context = useContext(AuthContext);
-    if (!context) throw new Error ("useAuth debe usarse dentro de AuthProvider");
+    if (!context) throw new Error("useAuth debe usarse dentro de AuthProvider");
     return context;
 }
 
-export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<User>(null);
     const [isAllowed, setIsAllowed] = useState<boolean>(false);
 
-    const login =  (email: string) => {
+    const login = (email: string) => {
         const isValidEmail = email.endsWith('.edu');
 
-        if (isValidEmail){
-            setUser({email});
+        if (isValidEmail) {
+            setUser({
+                email,
+                name: "Juan Pérez",
+                profilePic: require("../assets/images/profilepic.jpg")
+            });
             setIsAllowed(true);
-        }else{
+        } else {
             setUser(null);
             setIsAllowed(false);
-            alert("Solo correos .edu pueden ingresar")
+            alert("Solo correos .edu pueden ingresar");
         }
     };
 
     const logout = () => {
         setUser(null);
         setIsAllowed(false);
-    }
+    };
 
     return (
-        <AuthContext.Provider value={{user, isAllowed, login, logout}}>
+        <AuthContext.Provider value={{ user, isAllowed, login, logout }}>
             {children}
         </AuthContext.Provider>
-    )
-   
-}
+    );
+};
