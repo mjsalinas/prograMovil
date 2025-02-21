@@ -1,13 +1,15 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useFocusEffect } from "expo-router";
 import { useCallback, useState, useEffect } from "react";
-import { View, Text, TextInput, Image, StyleSheet, Animated } from "react-native";
+import { View, Text, TextInput, Image, StyleSheet, Animated, Button } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { useRouter } from "expo-router";
 
 export default function ProfileScreen() {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const [nombre, setNombre] = useState(user?.name || "");
     const fadeAnim = useState(new Animated.Value(0))[0];
+    const router = useRouter();
 
     useEffect(() => {
         Animated.timing(fadeAnim, {
@@ -23,7 +25,15 @@ export default function ProfileScreen() {
         }, [user])
     );
 
-    const profilePicUri = user?.profilePic && typeof user.profilePic === 'string' ? { uri: user.profilePic } : require("@/assets/images/profilepic.jpg");
+    const profilePicUri = user?.profilePic && typeof user.profilePic === 'string' 
+        ? { uri: user.profilePic } 
+        : require("@/assets/images/profilepic.jpg");
+
+
+    const handleLogout = () => {
+        logout();
+        router.push("/login");
+    };
 
     return (
         <View style={styles.container}>
@@ -42,6 +52,8 @@ export default function ProfileScreen() {
                     onChangeText={setNombre}
                 />
             </View>
+
+            <Button title="Cerrar sesión" onPress={handleLogout} />
         </View>
     );
 }
@@ -97,4 +109,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
 
