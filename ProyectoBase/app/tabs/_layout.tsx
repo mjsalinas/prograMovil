@@ -19,6 +19,7 @@ export default function Layout() {
                 },
                 tabBarActiveTintColor: "blue",
                 tabBarInactiveTintColor: "gray",
+                headerShown:false,
             })}
         />
     )
