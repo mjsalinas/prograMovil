@@ -3,14 +3,18 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "@/contexts/ThemeContext";
+import { darkTheme, lightTheme } from "@/styles/themes";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const router = useRouter();
   const { login } = useAuth();
+  const {theme} = useTheme();
+    const themeStyles = theme === "dark" ? darkTheme : lightTheme;
 
   return (
-    <View style={styles.container}>
+    <View style={[themeStyles.container, styles.container]}>
       <Image
         source={require("../assets/images/profilepic.jpg")}
         style={styles.avatar}
@@ -48,7 +52,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#F5F7FA",
   },
   avatar: {
     height: 120,
