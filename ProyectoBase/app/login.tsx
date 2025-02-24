@@ -15,7 +15,7 @@ export default function LoginScreen() {
         source={require("../assets/images/profilepic.jpg")}
         style={styles.avatar}
       />
-      <Text style={styles.title}>Bienvenido</Text>
+      <Text style={styles.title}>Bienvenido 2.0</Text>
 
       <TextInput
         style={styles.input}
