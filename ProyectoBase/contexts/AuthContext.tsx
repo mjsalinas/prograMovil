@@ -1,6 +1,12 @@
 import { createContext, isValidElement, useContext, useState } from "react"
 
-type User = {email: string} | null;
+type User = {
+    email: string;
+    nombreCompleto: string;
+    edad: number;
+    sexo: string;
+    estadoCivil: string;
+} | null;
 
 const AuthContext = createContext<{
     user: User,
@@ -22,8 +28,16 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     const login =  (email: string) => {
         const isValidEmail = email.endsWith('.edu');
 
+        const usuario: User = {
+        email,
+        nombreCompleto: "Alvaro Reyes",
+        edad: 23,
+        sexo: "Masculino",
+        estadoCivil: "Soltero"
+        };
+          
         if (isValidEmail){
-            setUser({email});
+            setUser(usuario);
             setIsAllowed(true);
         }else{
             setUser(null);
