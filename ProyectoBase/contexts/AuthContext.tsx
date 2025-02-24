@@ -1,12 +1,13 @@
 import { createContext, isValidElement, useContext, useState } from "react"
 
-type User = {email: string} | null;
+type User = {email: string, nombre?: string, sexo?: string} | null;
 
 const AuthContext = createContext<{
     user: User,
     isAllowed: boolean;
     login: (email: string) => void;
     logout: () => void;
+    actualizarUsuario: (nombre: string, sexo: string) => void;
 } | null>(null);
 
 export const useAuth = () => {
@@ -37,8 +38,12 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         setIsAllowed(false);
     }
 
+    const actualizarUsuario = (nombre: string, sexo: string) => {
+        setUser((prevUser) => (prevUser ? { ...prevUser, nombre, sexo } : null));
+    }
+
     return (
-        <AuthContext.Provider value={{user, isAllowed, login, logout}}>
+        <AuthContext.Provider value={{user, isAllowed, login, logout, actualizarUsuario}}>
             {children}
         </AuthContext.Provider>
     )

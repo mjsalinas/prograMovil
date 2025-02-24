@@ -21,7 +21,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Ionicons name="home-outline" size={100} color="#3A4750" style={styles.iconMain} />
-
+    
       <Text style={styles.welcomeText}>¡Hola, {user?.email || "Usuario"}!</Text>
       <Text style={styles.subText}>Bienvenido a tu panel de control</Text>
 
