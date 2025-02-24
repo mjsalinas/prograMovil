@@ -52,6 +52,9 @@ const styles = StyleSheet.create({
   avatarlogin: {
     height: 120,
     width: 120,
+    borderRadius: 60,
+    borderWidth: 2,
+    borderColor: "#F5F7FA",
   },
     title: {
     fontSize: 28,
