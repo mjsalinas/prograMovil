@@ -3,14 +3,14 @@ import { I18n } from "i18n-js"
 import { createContext, useContext, useEffect, useState } from "react";
 
 const translations = {
-    fr: { welcome: "Bienvenue" },
-    en: { welcome: "Welcome" },
-    es: { welcome: "Bienvenido", login: "Ingresar" },
-    de: { welcome: "Wilkommen" },
+    en: { welcome: "Welcome", changeLang: "Change language", changeTheme: "Change theme", idiom: "Idiom", theme: "Theme"},
+    es: { welcome: "Bienvenido", login: "Ingresar",  changeLang: "Cambiar Tema", changeTheme: "Cambiar tema", idiom: "Idioma", theme: "Tema"},
+    fr: { welcome: "Bienvenue", changeLang: "Changer de langue", changeTheme: "Changer de sujet", idiom: "Langue", theme: "Thème"},
+    de: { welcome: "Wilkommen",  changeLang: "Sprache ändern", changeTheme: "Thema ändern", idiom: "Sprache", theme: "Thema"},
 }
 
 const i18n = new I18n(translations);
-i18n.defaultLocale = "de";
+i18n.defaultLocale = "fr";
 i18n.enableFallback = true;
 
 type Language = "en" | "es" | "fr" | "de";
@@ -37,6 +37,9 @@ export const LanguageProvider=({ children }: { children: React.ReactNode }) => {
             if (storedLanguage) {
                 setLanguage(storedLanguage as Language);
                 i18n.locale = storedLanguage;
+            }else{
+                setLanguage(storedLanguage as Language);
+                i18n.locale = i18n.defaultLocale;                
             }
         };
         loadLanguage();
