@@ -12,6 +12,13 @@ export const lightTheme = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  title:{
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#000000",
+    textAlign: "center",
+  },
   button: {
     backgroundColor: "#3498db",
     padding: 12,
@@ -33,6 +40,13 @@ export const darkTheme = StyleSheet.create({
     backgroundColor: "#121212",
     alignItems: "center",
     justifyContent: "center",
+  },
+  title:{
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 20,
+    color: "#FFFFFF",
+    textAlign: "center",
   },
   text: {
     color: "#FFFFFF",

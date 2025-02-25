@@ -5,6 +5,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "reac
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "@/contexts/ThemeContext";
 import { darkTheme, lightTheme } from "@/styles/themes";
+import { i18n } from "@/contexts/LanguageContext";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,7 @@ export default function LoginScreen() {
         source={require("../assets/images/profilepic.jpg")}
         style={styles.avatar}
       />
-      <Text style={styles.title}>Bienvenido</Text>
+      <Text style={themeStyles.title}>{i18n.t("welcome")}</Text>
 
       <TextInput
         style={styles.input}
