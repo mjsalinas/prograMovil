@@ -37,6 +37,9 @@ export const LanguageProvider=({ children }: { children: React.ReactNode }) => {
             if (storedLanguage) {
                 setLanguage(storedLanguage as Language);
                 i18n.locale = storedLanguage;
+            }else{
+                setLanguage(storedLanguage as Language);
+                i18n.locale = i18n.defaultLocale;
             }
         };
         loadLanguage();
