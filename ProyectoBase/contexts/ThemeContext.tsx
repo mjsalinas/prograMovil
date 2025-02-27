@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const useTheme = () => {
     const context = useContext(ThemeContext);
-    if (!context) throw new Error("useTheme debe usarse dentro de ThemeProvider");
+    if (!context) throw new Error("useTheme debe usarse dentro de AuthProvider");
     return context;
 }
 
