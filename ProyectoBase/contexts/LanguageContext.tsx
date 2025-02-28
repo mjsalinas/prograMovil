@@ -4,13 +4,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const translations = {
     fr: { welcome: "Bienvenue" },
-    en: { welcome: "Welcome" },
     es: { welcome: "Bienvenido", login: "Ingresar" },
     de: { welcome: "Wilkommen" },
+    en: { welcome: "Welcome" },
 }
 
 const i18n = new I18n(translations);
-i18n.defaultLocale = "de";
+i18n.defaultLocale = "fr";
 i18n.enableFallback = true;
 
 type Language = "en" | "es" | "fr" | "de";
@@ -37,6 +37,10 @@ export const LanguageProvider=({ children }: { children: React.ReactNode }) => {
             if (storedLanguage) {
                 setLanguage(storedLanguage as Language);
                 i18n.locale = storedLanguage;
+            }else{
+                setLanguage(storedLanguage as Language);
+                i18n.locale = i18n.defaultLocale;
+
             }
         };
         loadLanguage();
