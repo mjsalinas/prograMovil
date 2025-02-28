@@ -11,8 +11,8 @@ export default function LoginScreen() {
   const [email, setEmail] = useState("");
   const router = useRouter();
   const { login } = useAuth();
-  const {theme} = useTheme();
-    const themeStyles = theme === "dark" ? darkTheme : lightTheme;
+  const { theme } = useTheme();
+  const themeStyles = theme === "dark" ? darkTheme : lightTheme;
 
   return (
     <View style={[themeStyles.container, styles.container]}>
@@ -43,6 +43,11 @@ export default function LoginScreen() {
         />
         <Text style={styles.buttonText}>Ingresar con Google</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => router.push("/register")}>
+        <Text style={styles.linkText}>¿No tienes cuenta? Regístrate</Text>
+      </TouchableOpacity>
+
     </View>
   );
 }
@@ -61,13 +66,14 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#4C6EF5",
   },
-    title: {
+  title: {
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 20,
     color: "#2D2E32",
     textAlign: "center",
   },
+  linkText: { marginTop: 10, color: "#007bff", textDecorationLine: "underline" },
   input: {
     width: "100%",
     height: 50,
