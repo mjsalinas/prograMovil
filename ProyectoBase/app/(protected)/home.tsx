@@ -40,7 +40,7 @@ export default function HomeScreen() {
       <Animated.View style={[styles.animatedView, { transform: [{ scale }] }]}>
         <TouchableOpacity 
           style={styles.button} 
-          onPress={() => router.push("/inventario")}
+          onPress={() => router.push("/inventory/inventory")}
           onPressIn={handlePressOut}
           onPressOut={handlePressOut}
         >
