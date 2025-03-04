@@ -1,21 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "expo-router";
+
+const { width, height } = Dimensions.get("window");
+
 export default function ProfileScreen() {
     const router = useRouter();
     const { logout } = useAuth();
+
     return (
-
-// codigo para limpiar estado en cambio de tabs
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         return () => setNombre('');
-    //     }, [])
-    // );
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Image
@@ -28,27 +24,22 @@ export default function ProfileScreen() {
 
                 <View style={styles.infoContainer}>
                     <View style={styles.infoRow}>
-                        <Ionicons name="person" size={24} color="#4C6EF5" />
+                        <Ionicons name="person" size={24} color="#007AFF" />
                         <Text style={styles.infoText}>@juanperez</Text>
                     </View>
 
                     <View style={styles.infoRow}>
-                        <Ionicons name="location" size={24} color="#4C6EF5" />
+                        <Ionicons name="location" size={24} color="#007AFF" />
                         <Text style={styles.infoText}>Ciudad de México</Text>
                     </View>
 
                     <View style={styles.infoRow}>
-                        <Ionicons name="calendar" size={24} color="#4C6EF5" />
+                        <Ionicons name="calendar" size={24} color="#007AFF" />
                         <Text style={styles.infoText}>Miembro desde 2022</Text>
                     </View>
                 </View>
 
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonEdit} onPress={() => alert("Editar perfil")}>
-                        <Ionicons name="create" size={20} color="white" />
-                        <Text style={styles.buttonText}>Editar Perfil</Text>
-                    </TouchableOpacity>
-
                     <TouchableOpacity style={styles.buttonLogout}
                         onPress={() => { logout(); router.replace("/login"); }}
                     >
@@ -58,19 +49,19 @@ export default function ProfileScreen() {
                 </View>
             </View>
         </ScrollView>
-
     );
 }
 
 const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
-        alignItems: "center",
-        paddingVertical: 20,
+        justifyContent: "center",
     },
     container: {
         flex: 1,
-        backgroundColor: "#f4f4f4",
+        width: width,
+        height: height,
+        backgroundColor: "#F0F2F5",
         alignItems: "center",
         padding: 20,
     },
@@ -79,71 +70,72 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     avatar: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
+        width: 140,
+        height: 140,
+        borderRadius: 70,
         borderWidth: 3,
-        borderColor: "#4C6EF5",
+        borderColor: "#007AFF",
+        shadowColor: "#000",
+        shadowOffset: { width: 3, height: 3 },
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
     },
     name: {
-        fontSize: 22,
+        fontSize: 26,
         fontWeight: "bold",
         marginTop: 10,
+        color: "#333",
     },
     email: {
         fontSize: 16,
-        color: "gray",
+        color: "#555",
+        fontStyle: "italic",
     },
     infoContainer: {
         backgroundColor: "white",
-        width: "100%",
-        padding: 15,
-        borderRadius: 10,
-        elevation: 3,
+        width: "90%",
+        padding: 20,
+        borderRadius: 20,
+        elevation: 6,
         shadowColor: "#000",
-        shadowOpacity: 0.2,
-        shadowOffset: { width: 2, height: 2 },
-        shadowRadius: 5,
+        shadowOpacity: 0.4,
+        shadowOffset: { width: 4, height: 4 },
+        shadowRadius: 8,
     },
     infoRow: {
         flexDirection: "row",
         alignItems: "center",
-        marginVertical: 8,
+        marginVertical: 12,
     },
     infoText: {
-        fontSize: 16,
-        marginLeft: 10,
+        fontSize: 18,
+        marginLeft: 15,
+        color: "#444",
+        fontWeight: "600",
     },
     buttonContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginTop: 20,
-        width: "100%",
-    },
-    buttonEdit: {
-        flexDirection: "row",
-        backgroundColor: "#4C6EF5",
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        borderRadius: 5,
+        marginTop: 30,
+        width: "90%",
         alignItems: "center",
-        flex: 1,
-        marginRight: 10,
     },
     buttonLogout: {
         flexDirection: "row",
-        backgroundColor: "#FF4C4C",
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        borderRadius: 5,
+        backgroundColor: "#FF3B30",
+        paddingVertical: 14,
+        paddingHorizontal: 22,
+        borderRadius: 10,
         alignItems: "center",
-        flex: 1,
-        marginLeft: 10,
+        width: "100%",
+        justifyContent: "center",
+        shadowColor: "#000",
+        shadowOpacity: 0.3,
+        shadowOffset: { width: 2, height: 2 },
+        shadowRadius: 4,
     },
     buttonText: {
         color: "white",
-        fontSize: 16,
-        marginLeft: 10,
+        fontSize: 18,
+        marginLeft: 12,
+        fontWeight: "bold",
     },
 });
-
