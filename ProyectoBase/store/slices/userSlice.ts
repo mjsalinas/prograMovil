@@ -20,3 +20,6 @@ const userSlice = createSlice({
         logoutUser: () => { return { name: "", email: "", password: "" } },
     }
 });
+
+export const {logoutUser, registerUser} = userSlice.actions;
+export default userSlice.reducer;
