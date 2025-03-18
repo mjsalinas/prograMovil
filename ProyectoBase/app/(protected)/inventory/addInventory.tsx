@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Alert, ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
+import { useDispatch } from "react-redux";
+import { addInventoryItem } from "@/store/slices/inventorySlice";
 
 export default function AddInventoryScreen() {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [inventory, setInventory] = useState({
     name: "",
@@ -25,10 +28,10 @@ export default function AddInventoryScreen() {
       return;
     }
 
-    const result = await ImagePicker.launchImageLibraryAsync({ 
-      mediaTypes: ImagePicker.MediaTypeOptions.Images, 
-      allowsEditing: true, 
-      quality: 1 
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1
     });
 
     if (!result.canceled) {
@@ -56,10 +59,9 @@ export default function AddInventoryScreen() {
       Alert.alert("Error", "Todos los campos son obligatorios.");
       return;
     }
+    dispatch(addInventoryItem(inventory))
 
-    console.log("Producto guardado:", inventory);
-    Alert.alert("Éxito", "El producto se ha registrado correctamente.");
-    router.back();
+  router.back();
   };
 
   return (

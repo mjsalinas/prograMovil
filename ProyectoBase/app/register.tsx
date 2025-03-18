@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuth } from "@/contexts/AuthContext";
+import { useDispatch } from "react-redux"
+import { logoutUser, registerUser } from "@/store/slices/userSlice";
 
 export default function RegisterScreen() {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const { login } = useAuth();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,10 +56,11 @@ export default function RegisterScreen() {
   };
 
   const handleRegister = () => {
-    if (!errors.name && !errors.email && !errors.password && !errors.confirmPassword) {
-      login(email);
-      router.replace("/home");
+    if (name && email && password === confirmPassword) {
+      dispatch(registerUser({ name, email, password }));
+      router.replace("/home")
     }
+
   };
 
   return (
@@ -97,9 +103,8 @@ export default function RegisterScreen() {
       {errors.confirmPassword ? <Text style={styles.errorText}>{errors.confirmPassword}</Text> : null}
 
       <TouchableOpacity
-        style={[styles.button, Object.values(errors).some((error) => error) && styles.buttonDisabled]}
+        style={styles.button}
         onPress={handleRegister}
-        disabled={Object.values(errors).some((error) => error)}
       >
         <Text style={styles.buttonText}>Registrarse</Text>
       </TouchableOpacity>
