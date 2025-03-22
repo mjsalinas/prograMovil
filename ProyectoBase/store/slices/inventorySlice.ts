@@ -13,7 +13,19 @@ type InventoryState = {
 }
 
 const initialState: InventoryState = {
-    items: [],
+    items: [{
+        name: "",
+        category: "",
+        price: "",
+        quantity: "",
+        image: null
+    },{
+        name: "",
+        category: "",
+        price: "",
+        quantity: "",
+        image: null
+    }],
 }
 
 const inventorySlice = createSlice({
