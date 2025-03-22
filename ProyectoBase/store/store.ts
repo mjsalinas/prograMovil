@@ -11,9 +11,7 @@ export const store = configureStore({
     }
 });
 
-
-// store.subscribe(() => { console.log("Estado actualizado:", store.getState()); });
-
+store.subscribe(() => { console.log("Estado actualizado:", store.getState()); });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
