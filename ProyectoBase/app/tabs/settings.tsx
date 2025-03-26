@@ -19,7 +19,8 @@ export default function SettingsScreen() {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get(BASE_URL + "/api/usuarios");
+                console.log("base url: " + BASE_URL);
+                const response = await axios.get("http://192.168.1.189:5144/api/usuarios");
                 dispatch(setUsers(response.data))
             }
             catch (err: any) {
@@ -30,7 +31,7 @@ export default function SettingsScreen() {
         fetchUsers();
     }, [dispatch])
     return (
-        <View style={styles.container}>
+        <View >
             <Text style={styles.text}>
                 Modo Actual: Claro | Oscuro
             </Text>
